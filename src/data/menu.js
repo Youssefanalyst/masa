@@ -36,41 +36,23 @@ export const categories = [
     ],
   },
   {
-    id: 'poultry',
-    name: 'طيور',
-    image: '/images/poultry.svg',
+    id: 'varied',
+    name: 'أصناف متنوعة',
+    image: '/images/varied.svg',
     items: [
+      // طيور
       { name: 'حمام كداب (الوحدة)', price: 90, image: 'https://files.catbox.moe/qjbjhg.jpg' },
       { name: 'فردة حمام جامبو', price: 165, image: 'https://files.catbox.moe/zbna4c.jpg' },
-    ],
-  },
-  {
-    id: 'mahshi',
-    name: 'محاشي',
-    image: '/images/mahshi.svg',
-    items: [
-      { name: 'كيلو ممبار محمر', price: 290, image: 'https://files.catbox.moe/l3poiq.jpg' },
+      // محاشي
+      { name: 'محشي ورق عنب (الكيلو)', price: 130, image: 'https://files.catbox.moe/aniu4p.jpg' },
       { name: 'محشي كرنب (الكيلو)', price: 120, image: 'https://files.catbox.moe/5ecsgq.jpg' },
       { name: 'محشي مشكل (الكيلو)', price: 120, image: 'https://files.catbox.moe/neagwc.jpg' },
-      { name: 'محشي ورق عنب (الكيلو)', price: 130, image: 'https://files.catbox.moe/aniu4p.jpg' },
-    ],
-  },
-  {
-    id: 'homecooking',
-    name: 'طبيخ',
-    image: '/images/homecooking.svg',
-    items: [
-      { name: 'صينية بطاطس كبيرة بدون لحوم', price: 190, image: 'https://files.catbox.moe/jmuy4a.jpg' },
+      { name: 'كيلو ممبار محمر', price: 290, image: 'https://files.catbox.moe/l3poiq.jpg' },
+      // طبيخ
       { name: 'علبة ملوخية/بامية/ويكا/خضار', price: 60, images: ['https://files.catbox.moe/jzbatt.jpg', 'https://files.catbox.moe/dspgtj.jpg'] },
-      { name: 'كيلو كفتة رز متصبعة', price: 300, image: 'https://files.catbox.moe/a6kh9e.jpg' },
-    ],
-  },
-  {
-    id: 'others',
-    name: 'أخرى',
-    image: '/images/others.svg',
-    items: [
       { name: 'طاجن رز معمر بالسمنة البلدي', price: 100, image: 'https://files.catbox.moe/21st1a.jpg' },
+      { name: 'صينية بطاطس كبيرة بدون لحوم', price: 190, image: 'https://files.catbox.moe/jmuy4a.jpg' },
+      { name: 'كيلو كفتة رز متصبعة', price: 300, image: 'https://files.catbox.moe/a6kh9e.jpg' },
     ],
   },
 ]
