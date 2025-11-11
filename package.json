@@ -17,6 +17,7 @@
     "import-supabase": "node scripts/import-to-supabase.js"
   },
   "reactSnap": {
+    "source": "dist",
     "inlineCss": true,
     "minifyHtml": {
       "collapseWhitespace": true,
