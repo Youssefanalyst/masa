@@ -1,0 +1,61 @@
+{
+  "name": "masa-restaurant",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && react-snap",
+    "build:vite": "vite build",
+    "postbuild": "react-snap",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "copy-images": "node scripts/copy-images.js",
+    "upload-images": "node scripts/upload-to-catbox.js",
+    "retry-uploads": "node scripts/retry-failed-uploads.js",
+    "update-image-urls": "node scripts/update-image-urls.js",
+    "import-supabase": "node scripts/import-to-supabase.js"
+  },
+  "reactSnap": {
+    "inlineCss": true,
+    "minifyHtml": {
+      "collapseWhitespace": true,
+      "removeComments": true
+    },
+    "crawl": true,
+    "include": [
+      "/",
+      "/menu",
+      "/about",
+      "/contact"
+    ]
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.81.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
+    "form-data": "^4.0.4",
+    "lucide-react": "^0.553.0",
+    "node-fetch": "^3.3.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^6.26.2",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "postcss": "^8.5.6",
+    "react-snap": "^1.23.0",
+    "tailwindcss": "^3.4.14",
+    "vite": "^5.4.10"
+  }
+}
