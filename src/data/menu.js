@@ -28,11 +28,7 @@ export const categories = [
       { name: 'دكر بط محشي ورق عنب، كيلو ونص محشي', price: 850, image: 'https://files.catbox.moe/eytnuw.jpg' },
       { name: 'جوزين حمام مع رز بسمتي', price: 860, image: 'https://files.catbox.moe/tpjv0q.jpg' },
       { name: 'جوزين حمام جامبو و2 كيلو محشي ورق عنب', price: 920, image: 'https://files.catbox.moe/cjxcsf.png' },
-      { name: 'صينية جلاش باللحمة البلدي', price: 300, image: 'https://files.catbox.moe/yrpjlq.jpg' },
-      { name: 'صينية رقاق باللحمة البلدي', price: 300, image: 'https://files.catbox.moe/r45x0e.jpg' },
-      { name: 'صينية مكرونة بالبشاميل', price: 300, image: 'https://files.catbox.moe/7l2mws.jpg' },
       { name: 'عشا العروسة: بطه 3.5 ك، فرخة مشوية، 4 حمام، نص كباب، نص كفتة، نص ممبار، كيلو رز بسمتي', price: 2600, image: 'https://files.catbox.moe/g9u9my.jpg' },
-      { name: 'فرخة مشوية مع بصل وبطاطس', price: 360, image: 'https://files.catbox.moe/jauf3l.jpg' },
     ],
   },
   {
@@ -53,6 +49,11 @@ export const categories = [
       { name: 'طاجن رز معمر بالسمنة البلدي', price: 100, image: 'https://files.catbox.moe/21st1a.jpg' },
       { name: 'صينية بطاطس كبيرة بدون لحوم', price: 190, image: 'https://files.catbox.moe/jmuy4a.jpg' },
       { name: 'كيلو كفتة رز متصبعة', price: 300, image: 'https://files.catbox.moe/a6kh9e.jpg' },
+      // صواني معجنات
+      { name: 'صينية جلاش باللحمة البلدي', price: 300, image: 'https://files.catbox.moe/yrpjlq.jpg' },
+      { name: 'صينية رقاق باللحمة البلدي', price: 300, image: 'https://files.catbox.moe/r45x0e.jpg' },
+      { name: 'صينية مكرونة بالبشاميل', price: 300, image: 'https://files.catbox.moe/7l2mws.jpg' },
+      { name: 'فرخة مشوية مع بصل وبطاطس', price: 360, image: 'https://files.catbox.moe/jauf3l.jpg' },
     ],
   },
 ]
