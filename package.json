@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && react-snap",
-    "build:vite": "vite build",
-    "postbuild": "react-snap",
+    "build": "vite build",
+    "build:snap": "vite build && react-snap",
     "lint": "eslint .",
     "preview": "vite preview",
     "copy-images": "node scripts/copy-images.js",
