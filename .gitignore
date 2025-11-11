@@ -20,6 +20,9 @@ dist-ssr
 # Admin credentials (keep private)
 ADMIN-CREDENTIALS.txt
 
+# Large local images (use Catbox CDN links instead)
+# public/images/products/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
