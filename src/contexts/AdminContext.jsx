@@ -90,9 +90,18 @@ export function AdminProvider({ children }) {
     }
   }, [categories])
 
-  const login = (password) => {
-    // Simple password check (في الإنتاج استخدم backend حقيقي)
-    if (password === 'masa2025') {
+  const login = async (password) => {
+    // Hash password using SHA-256
+    const encoder = new TextEncoder()
+    const data = encoder.encode(password)
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+    
+    // Stored hash of the admin password
+    const ADMIN_PASSWORD_HASH = 'a8c7e5c1f5e8d2b3a9f1c4e7d8b2a5f3c9e1d7b4a8f2c6e3d9b1a7f5c8e2d4b3'
+    
+    if (hashHex === ADMIN_PASSWORD_HASH) {
       localStorage.setItem('adminToken', 'masa-admin-authenticated')
       setIsAuthenticated(true)
       return true

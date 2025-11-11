@@ -49,7 +49,7 @@ npm run dev
 ### Admin Panel:
 ```
 URL: http://localhost:5173/admin/login
-Password: masa2025
+Password: (اتصل بالمسؤول للحصول على كلمة المرور)
 ```
 
 ## 📁 هيكل المشروع

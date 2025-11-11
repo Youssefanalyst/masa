@@ -16,7 +16,7 @@ http://localhost:5173/admin/login
 ```
 
 ### 2. بيانات تسجيل الدخول:
-- **كلمة المرور الافتراضية**: `masa2025`
+- **كلمة المرور**: (محفوظة لدى المسؤول)
 
 ### 3. بعد تسجيل الدخول:
 سيتم تحويلك تلقائياً إلى: `/admin/dashboard`
@@ -247,7 +247,7 @@ const { categories } = useAdmin()
 1. افتح Developer Tools (F12)
 2. Application → Local Storage
 3. احذف `adminToken`
-4. ادخل بكلمة المرور الافتراضية: `masa2025`
+4. ادخل بكلمة المرور الصحيحة
 
 ---
 

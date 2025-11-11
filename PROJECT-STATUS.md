@@ -150,7 +150,7 @@ npm run build
 
 ### Admin:
 - **URL**: `/admin/login`
-- **كلمة المرور**: `masa2025`
+- **كلمة المرور**: (محفوظة بشكل آمن)
 
 ### Supabase:
 - **Configuration**: `.env`
@@ -229,7 +229,7 @@ A: تم الحل في `vite.config.js` (historyApiFallback)
 A: تم إضافة loading states - يجب أن يعمل الآن
 
 **Q: نسيت كلمة مرور Admin؟**
-A: `masa2025` (أو امسح `adminToken` من localStorage)
+A: امسح `adminToken` من localStorage واتصل بالمسؤول
 
 **Q: Supabase مش شغال؟**
 A: الموقع سيعمل تلقائياً مع localStorage كـ fallback

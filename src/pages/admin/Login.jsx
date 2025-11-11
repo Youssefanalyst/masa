@@ -9,11 +9,12 @@ export default function AdminLogin() {
   const { login } = useAdmin()
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     
-    if (login(password)) {
+    const success = await login(password)
+    if (success) {
       navigate('/admin/dashboard')
     } else {
       setError('كلمة المرور غير صحيحة')
@@ -61,9 +62,6 @@ export default function AdminLogin() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-500">
-            <p>كلمة المرور الافتراضية: <code className="bg-gray-100 px-2 py-1 rounded">masa2025</code></p>
-          </div>
         </div>
       </div>
     </div>

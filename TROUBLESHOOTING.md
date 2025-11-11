@@ -137,7 +137,7 @@ const { categories } = useAdmin()
 1. افتح DevTools (F12)
 2. Application → Local Storage
 3. احذف `adminToken`
-4. كلمة المرور الافتراضية: `masa2025`
+4. سجّل الدخول بكلمة المرور الصحيحة
 
 ### المشكلة: حذفت بيانات بالخطأ
 **الحل:**
