@@ -13,7 +13,9 @@
     "upload-images": "node scripts/upload-to-catbox.js",
     "retry-uploads": "node scripts/retry-failed-uploads.js",
     "update-image-urls": "node scripts/update-image-urls.js",
-    "import-supabase": "node scripts/import-to-supabase.js"
+    "import-supabase": "node scripts/import-to-supabase.js",
+    "upload-supabase-images": "node scripts/upload-local-images-to-supabase.js",
+    "update-menu-supabase": "node scripts/update-menu-with-supabase-urls.js"
   },
   "reactSnap": {
     "source": "dist",
