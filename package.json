@@ -17,7 +17,8 @@
     "upload-supabase-images": "node scripts/upload-local-images-to-supabase.js",
     "update-menu-supabase": "node scripts/update-menu-with-supabase-urls.js",
     "export:assets": "node scripts/export-assets.js",
-    "deploy:assets": "gh-pages -d assets-dist -b gh-pages -m 'deploy assets-dist'"
+    "deploy:assets": "gh-pages -d assets-dist -b gh-pages -m 'deploy assets-dist'",
+    "upload:mongo": "node scripts/upload-to-mongodb.js"
   },
   "reactSnap": {
     "source": "dist",
@@ -45,7 +46,8 @@
     "react-dom": "^19.2.0",
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.26.2",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "mongodb": "^5.9.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
