@@ -15,7 +15,9 @@
     "update-image-urls": "node scripts/update-image-urls.js",
     "import-supabase": "node scripts/import-to-supabase.js",
     "upload-supabase-images": "node scripts/upload-local-images-to-supabase.js",
-    "update-menu-supabase": "node scripts/update-menu-with-supabase-urls.js"
+    "update-menu-supabase": "node scripts/update-menu-with-supabase-urls.js",
+    "export:assets": "node scripts/export-assets.js",
+    "deploy:assets": "gh-pages -d assets-dist -b gh-pages -m 'deploy assets-dist'"
   },
   "reactSnap": {
     "source": "dist",
@@ -58,6 +60,7 @@
     "postcss": "^8.5.6",
     "react-snap": "^1.23.0",
     "tailwindcss": "^3.4.14",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "gh-pages": "^6.1.1"
   }
 }
