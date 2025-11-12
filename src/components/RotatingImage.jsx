@@ -1,25 +1,28 @@
 import { useState, useEffect } from 'react'
+import { resolveAssetUrl } from '../lib/assets'
 
 export default function RotatingImage({ images, alt, className, interval = 5000 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  const resolvedImages = (images || []).map(img => resolveAssetUrl(img))
+
   useEffect(() => {
-    if (!images || images.length <= 1) return
+    if (!resolvedImages || resolvedImages.length <= 1) return
 
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length)
+      setCurrentIndex((prev) => (prev + 1) % resolvedImages.length)
     }, interval)
 
     return () => clearInterval(timer)
-  }, [images, interval])
+  }, [resolvedImages, interval])
 
-  if (!images || images.length === 0) {
+  if (!resolvedImages || resolvedImages.length === 0) {
     return null
   }
 
   return (
     <img
-      src={images[currentIndex]}
+      src={resolvedImages[currentIndex]}
       alt={alt}
       className={className}
       loading="lazy"

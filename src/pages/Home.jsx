@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { restaurantName, tagline, whatsappLink, heroImage, placeholderImage, phone } from '../data/menu'
+import { resolveAssetUrl } from '../lib/assets'
 import { useAdmin } from '../contexts/AdminContext'
 import RotatingImage from '../components/RotatingImage'
 
@@ -17,7 +18,7 @@ export default function Home() {
         <meta property="og:type" content="restaurant" />
         <meta property="og:title" content={`${restaurantName} - طعم بيتي أصيل`} />
         <meta property="og:description" content={tagline} />
-        <meta property="og:image" content={heroImage} />
+        <meta property="og:image" content={resolveAssetUrl(heroImage)} />
         <meta property="og:image:alt" content="عشا العروسة - ديك رومي، بطة، حمام من مطعم ماسة" />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
         <meta property="og:locale" content="ar_EG" />
@@ -26,7 +27,7 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${restaurantName} - طعم بيتي أصيل`} />
         <meta name="twitter:description" content={tagline} />
-        <meta name="twitter:image" content={heroImage} />
+        <meta name="twitter:image" content={resolveAssetUrl(heroImage)} />
         <meta name="twitter:image:alt" content="عشا العروسة - ديك رومي، بطة، حمام من مطعم ماسة" />
         
         {/* Business Info */}
@@ -65,7 +66,7 @@ export default function Home() {
             <Link to="/menu" className="px-6 py-3 rounded-full bg-brand-primary text-white hover:bg-amber-700">شاهد المنيو</Link>
           </div>
           <div className="max-w-4xl mx-auto">
-            <img src={heroImage || placeholderImage} alt="عشا العروسة - ديك رومي، بطة، حمام، وأطباق شهية من مطعم ماسة" loading="eager" className="w-full h-auto object-contain rounded-2xl shadow-lg border border-amber-100" />
+            <img src={resolveAssetUrl(heroImage) || placeholderImage} alt="عشا العروسة - ديك رومي، بطة، حمام، وأطباق شهية من مطعم ماسة" loading="eager" className="w-full h-auto object-contain rounded-2xl shadow-lg border border-amber-100" />
           </div>
         </div>
       </section>

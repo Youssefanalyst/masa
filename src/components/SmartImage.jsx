@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { placeholderImage } from '../data/menu'
+import { resolveAssetUrl } from '../lib/assets'
 
 export default function SmartImage({ itemName, itemImage, categoryImage, className = '', alt = '', onlyProduct = false }) {
   const [imgError, setImgError] = useState(false)
   
-  // Use itemImage (CDN) directly, fallback to placeholder first (then category)
-  const src = imgError 
+  const chosen = imgError 
     ? (onlyProduct ? null : (placeholderImage || categoryImage))
     : (itemImage || placeholderImage || categoryImage)
+  const src = chosen ? resolveAssetUrl(chosen) : null
 
   if (!src) {
     return null

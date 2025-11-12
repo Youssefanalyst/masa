@@ -4,6 +4,7 @@ import { currency, restaurantName } from '../data/menu'
 import { useAdmin } from '../contexts/AdminContext'
 import SmartImage from '../components/SmartImage'
 import RotatingImage from '../components/RotatingImage'
+import { resolveAssetUrl } from '../lib/assets'
 
 export default function Menu() {
   const { categories } = useAdmin()
@@ -61,7 +62,7 @@ export default function Menu() {
                 "@type": "MenuItem",
                 "name": item.name,
                 "description": item.desc || cat.name,
-                "image": item.image || item.images?.[0],
+                "image": resolveAssetUrl(item.image || item.images?.[0]),
                 "offers": item.price ? {
                   "@type": "Offer",
                   "price": item.price,

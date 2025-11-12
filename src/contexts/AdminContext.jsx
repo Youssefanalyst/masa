@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { categories as initialCategories } from '../data/menu'
 import { supabase, isSupabaseEnabled } from '../lib/supabase'
+import { assetsBase } from '../lib/assets'
 
 const AdminContext = createContext()
 
@@ -18,6 +19,40 @@ export function AdminProvider({ children }) {
       setIsAuthenticated(true)
     }
   }, [])
+
+  const loadFromLocalStorage = () => {
+    const savedCategories = localStorage.getItem('menuCategories')
+    if (savedCategories) {
+      try {
+        setCategories(JSON.parse(savedCategories))
+        console.log('📦 Data loaded from localStorage')
+      } catch (error) {
+        console.error('Error loading categories:', error)
+        setCategories(initialCategories)
+      }
+    } else {
+      setCategories(initialCategories)
+      console.log('📋 Using initial categories')
+    }
+  }
+
+  const loadFromRemoteAssets = async () => {
+    try {
+      const res = await fetch(`${assetsBase}/data/menu.json`, { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
+      if (data && Array.isArray(data.categories)) {
+        setCategories(data.categories)
+        localStorage.setItem('menuCategories', JSON.stringify(data.categories))
+        console.log('🌐 Data loaded from GitHub Pages assets')
+        return
+      }
+      throw new Error('Invalid menu.json format')
+    } catch (error) {
+      console.warn('Remote assets failed, falling back to localStorage/default:', error)
+      loadFromLocalStorage()
+    }
+  }
 
   const loadCategories = async () => {
     if (isSupabaseEnabled()) {
@@ -61,24 +96,8 @@ export function AdminProvider({ children }) {
         loadFromLocalStorage()
       }
     } else {
-      // Load from localStorage
-      loadFromLocalStorage()
-    }
-  }
-
-  const loadFromLocalStorage = () => {
-    const savedCategories = localStorage.getItem('menuCategories')
-    if (savedCategories) {
-      try {
-        setCategories(JSON.parse(savedCategories))
-        console.log('📦 Data loaded from localStorage')
-      } catch (error) {
-        console.error('Error loading categories:', error)
-        setCategories(initialCategories)
-      }
-    } else {
-      setCategories(initialCategories)
-      console.log('📋 Using initial categories')
+      // Load from GitHub Pages assets first, then fallback
+      await loadFromRemoteAssets()
     }
   }
 
