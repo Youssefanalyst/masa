@@ -33,3 +33,6 @@ ADMIN-CREDENTIALS.txt
 *.njsproj
 *.sln
 *.sw?
+
+# Built assets for GitHub Pages
+assets-dist
