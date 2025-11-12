@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import { categories as initialCategories } from '../data/menu'
 import { supabase, isSupabaseEnabled } from '../lib/supabase'
 import { assetsBase } from '../lib/assets'
+import { publishMenuToGithub } from '../lib/github'
 
 const AdminContext = createContext()
 
@@ -54,6 +55,17 @@ export function AdminProvider({ children }) {
     }
   }
 
+  const maybeAutoPublish = async (cats) => {
+    try {
+      const token = localStorage.getItem('gh_pat')
+      if (!token) return
+      await publishMenuToGithub(cats, token)
+      console.log('🚀 Auto-published menu to GitHub Pages')
+    } catch (e) {
+      console.warn('Auto-publish failed:', e)
+    }
+  }
+
   const loadCategories = async () => {
     if (isSupabaseEnabled()) {
       // Load from Supabase
@@ -96,7 +108,17 @@ export function AdminProvider({ children }) {
         loadFromLocalStorage()
       }
     } else {
-      // Load from GitHub Pages assets first, then fallback
+      // Prefer localStorage if present (to preserve admin edits), otherwise fetch remote assets
+      const saved = localStorage.getItem('menuCategories')
+      if (saved) {
+        try {
+          setCategories(JSON.parse(saved))
+          console.log('📦 Data loaded from localStorage (preferred)')
+          return
+        } catch (e) {
+          console.warn('Invalid local categories, trying remote assets:', e)
+        }
+      }
       await loadFromRemoteAssets()
     }
   }
@@ -159,21 +181,23 @@ export function AdminProvider({ children }) {
         return false
       }
     } else {
-      // localStorage fallback
-      setCategories(prevCategories =>
-        prevCategories.map(cat =>
+      // localStorage fallback + auto publish
+      setCategories(prevCategories => {
+        const next = prevCategories.map(cat =>
           cat.id === categoryId
             ? { ...cat, items: [...cat.items, product] }
             : cat
         )
-      )
+        maybeAutoPublish(next)
+        return next
+      })
       return true
     }
   }
 
   const updateProduct = (categoryId, productIndex, updatedProduct) => {
-    setCategories(prevCategories =>
-      prevCategories.map(cat =>
+    setCategories(prevCategories => {
+      const next = prevCategories.map(cat =>
         cat.id === categoryId
           ? {
               ...cat,
@@ -183,12 +207,14 @@ export function AdminProvider({ children }) {
             }
           : cat
       )
-    )
+      maybeAutoPublish(next)
+      return next
+    })
   }
 
   const deleteProduct = (categoryId, productIndex) => {
-    setCategories(prevCategories =>
-      prevCategories.map(cat =>
+    setCategories(prevCategories => {
+      const next = prevCategories.map(cat =>
         cat.id === categoryId
           ? {
               ...cat,
@@ -196,25 +222,35 @@ export function AdminProvider({ children }) {
             }
           : cat
       )
-    )
+      maybeAutoPublish(next)
+      return next
+    })
   }
 
   const addCategory = (category) => {
-    setCategories(prev => [...prev, category])
+    setCategories(prev => {
+      const next = [...prev, category]
+      maybeAutoPublish(next)
+      return next
+    })
   }
 
   const updateCategory = (categoryId, updatedCategory) => {
-    setCategories(prevCategories =>
-      prevCategories.map(cat =>
+    setCategories(prevCategories => {
+      const next = prevCategories.map(cat =>
         cat.id === categoryId ? { ...cat, ...updatedCategory } : cat
       )
-    )
+      maybeAutoPublish(next)
+      return next
+    })
   }
 
   const deleteCategory = (categoryId) => {
-    setCategories(prevCategories =>
-      prevCategories.filter(cat => cat.id !== categoryId)
-    )
+    setCategories(prevCategories => {
+      const next = prevCategories.filter(cat => cat.id !== categoryId)
+      maybeAutoPublish(next)
+      return next
+    })
   }
 
   const resetToDefault = () => {
