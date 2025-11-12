@@ -1,11 +1,12 @@
-name: Deploy Assets to GitHub Pages
+name: Deploy Site to GitHub Pages
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'src/data/**'
-      - 'public/images/products/**'
+      - 'src/**'
+      - 'public/**'
+      - 'vite.config.js'
       - 'scripts/export-assets.js'
       - 'package.json'
       - 'package-lock.json'
@@ -17,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -27,13 +30,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build assets bundle
-        run: npm run export:assets
+      - name: Build site
+        run: npm run build
+
+      - name: Ensure data/menu.json (preserve live if exists)
+        run: |
+          mkdir -p dist/data
+          set -e
+          if curl -fsSL https://youssefanalyst.github.io/masa/data/menu.json -o dist/data/menu.json; then
+            echo "Kept existing live menu.json"
+          else
+            echo "No live menu.json found; generating from source"
+            npm run export:assets
+            cp -f assets-dist/data/menu.json dist/data/menu.json
+          fi
+
+      - name: Add SPA fallback 404.html
+        run: cp dist/index.html dist/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: assets-dist
+          publish_dir: dist
           publish_branch: gh-pages
-          commit_message: 'ci: deploy assets-dist from ${{ github.sha }}'
+          commit_message: 'ci: deploy site from ${{ github.sha }}'
