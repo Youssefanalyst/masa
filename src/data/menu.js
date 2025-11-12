@@ -1,5 +1,5 @@
 export const restaurantName = 'مطبخ ماسة'
-export const tagline = 'اكلنا كله بالسمنه البلدى بفضل الله والنظافه رأس مالنا'
+export const tagline = '✨معانا حتدووق طعم النظافه ✨'
 export const phone = '+201113020419'
 export const email = 'Mrwh75750@gmail.com'
 export const facebook = 'https://www.facebook.com/people/%D9%85%D8%B7%D8%A8%D8%AE-%D9%85%D8%A7%D8%B3%D9%87-%D9%85%D8%B7%D8%B9%D9%85-%D8%A8%D9%8A%D8%AA%D9%8A/100064267953638/?rdid=Jh8VEjhyhjgrxycu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19u5MDbtBV%2F'
