@@ -1,0 +1,6 @@
+# Ignore large local images - use Catbox CDN links instead
+
+# Ignore development files
+src/data/uploaded-images.json
+scripts/
+*.log
