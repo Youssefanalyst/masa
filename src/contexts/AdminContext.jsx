@@ -39,18 +39,18 @@ export function AdminProvider({ children }) {
 
   const loadFromRemoteAssets = async () => {
     try {
-      const res = await fetch(`${assetsBase}/data/menu.json`, { cache: 'no-store' })
+      const res = await fetch(`/api/menu`, { cache: 'no-store' })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const data = await res.json()
       if (data && Array.isArray(data.categories)) {
         setCategories(data.categories)
         localStorage.setItem('menuCategories', JSON.stringify(data.categories))
-        console.log('🌐 Data loaded from GitHub Pages assets')
+        console.log('🌐 Data loaded from MongoDB API')
         return
       }
       throw new Error('Invalid menu.json format')
     } catch (error) {
-      console.warn('Remote assets failed, falling back to localStorage/default:', error)
+      console.warn('Remote API failed, falling back to localStorage/default:', error)
       loadFromLocalStorage()
     }
   }
@@ -99,17 +99,7 @@ export function AdminProvider({ children }) {
         loadFromLocalStorage()
       }
     } else {
-      // Prefer localStorage if present (to preserve admin edits), otherwise fetch remote assets
-      const saved = localStorage.getItem('menuCategories')
-      if (saved) {
-        try {
-          setCategories(JSON.parse(saved))
-          console.log('📦 Data loaded from localStorage (preferred)')
-          return
-        } catch (e) {
-          console.warn('Invalid local categories, trying remote assets:', e)
-        }
-      }
+      // Load from Mongo API by default; fallback to localStorage only if it fails
       await loadFromRemoteAssets()
     }
   }
