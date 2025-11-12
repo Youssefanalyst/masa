@@ -24,12 +24,25 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey)
+const BUCKET = process.env.SUPABASE_BUCKET || 'photos'
 
 const LOCAL_IMAGES_DIR = join(__dirname, '../public/images/products')
 
 // Get file extension
 function getExtension(filename) {
   return path.extname(filename).substring(1).toLowerCase()
+}
+
+// Create an ASCII-safe slug for storage keys
+function toSafeSlug(filenameBase) {
+  // Remove diacritics, keep ascii letters/numbers/dash/underscore
+  return filenameBase
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9._-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^[-.]+|[-.]+$/g, '')
+    .toLowerCase()
 }
 
 // Get MIME type
@@ -52,23 +65,8 @@ async function uploadLocalImagesToSupabase() {
   let failCount = 0
 
   try {
-    // Check if bucket exists, create if not
-    const { data: buckets } = await supabase.storage.listBuckets()
-    const bucketExists = buckets?.some(b => b.name === 'product-images')
-    
-    if (!bucketExists) {
-      console.log('📦 Creating product-images bucket...')
-      const { error: bucketError } = await supabase.storage.createBucket('product-images', {
-        public: true,
-        fileSizeLimit: 5242880, // 5MB
-      })
-      
-      if (bucketError) {
-        console.error('❌ Error creating bucket:', bucketError.message)
-        process.exit(1)
-      }
-      console.log('✅ Bucket created successfully!\n')
-    }
+    // Note: anon key can't list/create buckets. We assume bucket exists.
+    // If it doesn't, first upload will fail and we will show guidance.
 
     // Read all files from local directory
     const files = fs.readdirSync(LOCAL_IMAGES_DIR).filter(f => 
@@ -85,22 +83,31 @@ async function uploadLocalImagesToSupabase() {
         
         const fileBuffer = fs.readFileSync(filePath)
         const ext = getExtension(filename)
-        const storageFilename = `products/${filename}`
+        const base = path.basename(filename, path.extname(filename))
+        const safeBase = toSafeSlug(base) || `img-${Date.now()}`
+        const storageFilename = `products/${safeBase}.${ext}`
         
         const { data, error } = await supabase.storage
-          .from('product-images')
+          .from(BUCKET)
           .upload(storageFilename, fileBuffer, {
             contentType: getMimeType(ext),
             upsert: true, // Overwrite if exists
           })
 
         if (error) {
+          if (error.message && /bucket/i.test(error.message)) {
+            console.error(`  ❌ Upload failed: ${error.message}`)
+            console.error(`\n⚠️ Bucket "${BUCKET}" not found. Please create it in Supabase Dashboard:`)
+            console.error(`   Storage → Create bucket → name: ${BUCKET} → Public: ON`)
+            console.error('   Then re-run: npm run upload-supabase-images')
+            process.exit(1)
+          }
           console.error(`  ❌ Upload failed: ${error.message}`)
           failCount++
         } else {
           // Get public URL
           const { data: publicUrlData } = supabase.storage
-            .from('product-images')
+            .from(BUCKET)
             .getPublicUrl(storageFilename)
           
           newImageUrls[filename] = publicUrlData.publicUrl

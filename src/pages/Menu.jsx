@@ -120,7 +120,7 @@ export default function Menu() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {currentCategory.items.map((item, idx) => (
               <article 
-                key={idx} 
+                key={`${currentCategory.id}-${item.name}-${idx}`}
                 className="rounded-xl border border-amber-100 bg-white shadow-sm hover:shadow-md overflow-hidden transition-shadow"
                 itemScope 
                 itemType="https://schema.org/MenuItem"
@@ -128,7 +128,7 @@ export default function Menu() {
                 {item.images ? (
                   <RotatingImage
                     images={item.images}
-                    alt={`${item.name} - ${currentCategory.name} من مطعم ماسة`}
+                    alt={`${item.name} - ${currentCategory.name} من ${restaurantName}`}
                     className="w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover"
                     interval={5000}
                   />
@@ -137,7 +137,7 @@ export default function Menu() {
                     itemName={item.name}
                     itemImage={item.image}
                     categoryImage={currentCategory.image}
-                    alt={`${item.name} - ${currentCategory.name} من مطعم ماسة`}
+                    alt={`${item.name} - ${currentCategory.name} من ${restaurantName}`}
                     className="w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover"
                   />
                 )}
@@ -174,7 +174,8 @@ function getCategoryIcon(categoryId) {
     poultry: '🍗',
     mahshi: '🌿',
     homecooking: '🍲',
-    others: '🍚'
+    others: '🍚',
+    varied: '🍴'
   }
   return icons[categoryId] || '📋'
 }

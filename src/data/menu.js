@@ -7,7 +7,7 @@ export const whatsappLink = `https://wa.me/201113020419?text=${encodeURIComponen
 export const currency = 'ج.م'
 
 // صور عامة (محلية من مجلد public)
-export const heroImage = 'https://files.catbox.moe/g9u9my.jpg'
+export const heroImage = '/images/products/عشا-العروسه-2600-بطه-3كيلو-ونص-فرخه-مشويه-جوزين-حمام-4-نص-كباب-نص-كفته-نص-ممبار-كيلو-رز-بسمتي.jpg'
 export const placeholderImage = '/images/placeholder.svg'
 
 export const categories = [
@@ -16,19 +16,19 @@ export const categories = [
     name: 'صواني',
     image: '/images/trays.svg',
     items: [
-      { name: 'كبسه بالديك الرومي تكفي 10 أفراد مع سلطة الدقوس وسلطة زبادي', price: 1100, image: 'https://files.catbox.moe/0k3byw.jpg' },
-      { name: 'باكدج 1100: بطه جامبو، نص ممبار، نص كفته، كيلو رز بسمتي، بطاطس محمرة', price: 1100, image: 'https://files.catbox.moe/kx3u4p.jpg' },
-      { name: 'الصينية: فرختين محمرين، 3 كيلو محشي مشكل، 3 ملوخية', price: 1250, image: 'https://files.catbox.moe/tx2ipz.png' },
-      { name: 'جوزين حمام جامبو، كيلو كفتة رز، كيلو رز بسمتي', price: 1450, image: 'https://files.catbox.moe/j6syad.jpg' },
-      { name: 'ديك رومي ~8 كيلو مع رز بسمتي', price: 1500, image: 'https://files.catbox.moe/l9jk9k.jpg' },
-      { name: 'فرخة مشوية، 2 كيلو محشي مشكل، بطاطس محمرة', price: 600, image: 'https://files.catbox.moe/dpemo3.jpg' },
-      { name: '3 كيلو محشي مشكل وفرخة محمرة', price: 720, image: 'https://files.catbox.moe/q4ulel.jpg' },
-      { name: 'فرخة محمرة، كيلو ورق عنب، كيلو كرنب، نص ممبار', price: 750, image: 'https://files.catbox.moe/xuamxp.jpg' },
-      { name: 'جوز حمام كداب، جوز حمام جامبو، كيلو رز بسمتي، طاجن رز معمر', price: 800, image: 'https://files.catbox.moe/fty43a.jpg' },
-      { name: 'دكر بط محشي ورق عنب، كيلو ونص محشي', price: 850, image: 'https://files.catbox.moe/eytnuw.jpg' },
-      { name: 'جوزين حمام مع رز بسمتي', price: 860, image: 'https://files.catbox.moe/tpjv0q.jpg' },
-      { name: 'جوزين حمام جامبو و2 كيلو محشي ورق عنب', price: 920, image: 'https://files.catbox.moe/cjxcsf.png' },
-      { name: 'عشا العروسة: بطه 3.5 ك، فرخة مشوية، 4 حمام، نص كباب، نص كفتة، نص ممبار، كيلو رز بسمتي', price: 2600, image: 'https://files.catbox.moe/g9u9my.jpg' },
+      { name: 'كبسه بالديك الرومي تكفي 10 أفراد مع سلطة الدقوس وسلطة زبادي', price: 1100, image: '/images/products/1100-كبسه-بالديك-الرومى-تكفى-10افراد-مع-سلطة-الدقوس-وسلطة-زبادى.jpg' },
+      { name: 'باكدج 1100: بطه جامبو، نص ممبار، نص كفته، كيلو رز بسمتي، بطاطس محمرة', price: 1100, image: '/images/products/1100بطه-جامبو-نص-ممبار-نص-كفته-كيلو-رز-بسمتي-بطاطس-محمره.jpg' },
+      { name: 'الصينية: فرختين محمرين، 3 كيلو محشي مشكل، 3 ملوخية', price: 1250, image: '/images/products/1250-الصنيه-فرختين-محمرين-3كيلو-محشى-مشكل-3ملوخيه.png' },
+      { name: 'جوزين حمام جامبو، كيلو كفتة رز، كيلو رز بسمتي', price: 1450, image: '/images/products/1450-جوزين-حمام-جامبو-كيلو-كفته-رز-كيلو-رز-بسمتي.jpg' },
+      { name: 'ديك رومي ~8 كيلو مع رز بسمتي', price: 1500, image: '/images/products/1500-ديك-رومي-8كيلو-تقريبا-مع-رز-بسمتى.jpg' },
+      { name: 'فرخة مشوية، 2 كيلو محشي مشكل، بطاطس محمرة', price: 600, image: '/images/products/600-فرخه-مشويه-2كيلو-محشى-مشكل-وبطاطس-محمره.jpg' },
+      { name: '3 كيلو محشي مشكل وفرخة محمرة', price: 720, image: '/images/products/720-3كيلو-محشى-مشكل-وفرخة-محمره.jpg' },
+      { name: 'فرخة محمرة، كيلو ورق عنب، كيلو كرنب، نص ممبار', price: 750, image: '/images/products/750-فرخه-محمره-كيلو-ورق-عنب-كيلو-كرنب-نص-ممبار.jpg' },
+      { name: 'جوز حمام كداب، جوز حمام جامبو، كيلو رز بسمتي، طاجن رز معمر', price: 800, image: '/images/products/800-جوز-حمام-كداب-جوز-حمام-جامبو-كيلو-رز-بسمتي-طاجن-رز-معمر.jpg' },
+      { name: 'دكر بط محشي ورق عنب، كيلو ونص محشي', price: 850, image: '/images/products/850-دكر-بط-محشى-ورق-عنب-كيلو-ونص-محشى.jpg' },
+      { name: 'جوزين حمام مع رز بسمتي', price: 860, image: '/images/products/860-جوزين-حمام-مع-رز-بسمتي.jpg' },
+      { name: 'جوزين حمام جامبو و2 كيلو محشي ورق عنب', price: 920, image: '/images/products/920-جوزين-حمام-جامبو-2كيلو-محشى-ورق-عنب.png' },
+      { name: 'عشا العروسة: بطه 3.5 ك، فرخة مشوية، 4 حمام، نص كباب، نص كفتة، نص ممبار، كيلو رز بسمتي', price: 2600, image: '/images/products/عشا-العروسه-2600-بطه-3كيلو-ونص-فرخه-مشويه-جوزين-حمام-4-نص-كباب-نص-كفته-نص-ممبار-كيلو-رز-بسمتي.jpg' },
     ],
   },
   {
@@ -37,23 +37,23 @@ export const categories = [
     image: '/images/varied.svg',
     items: [
       // طيور
-      { name: 'حمام كداب (الوحدة)', price: 90, image: 'https://files.catbox.moe/qjbjhg.jpg' },
-      { name: 'فردة حمام جامبو', price: 165, image: 'https://files.catbox.moe/zbna4c.jpg' },
+      { name: 'حمام كداب (الوحدة)', price: 90, image: '/images/products/حمام-كداب-الواحده-ب-90.jpg' },
+      { name: 'فردة حمام جامبو', price: 165, image: '/images/products/فردة-حمام-جامبو-165.jpg' },
       // محاشي
-      { name: 'محشي ورق عنب (الكيلو)', price: 130, image: 'https://files.catbox.moe/aniu4p.jpg' },
-      { name: 'محشي كرنب (الكيلو)', price: 120, image: 'https://files.catbox.moe/5ecsgq.jpg' },
-      { name: 'محشي مشكل (الكيلو)', price: 120, image: 'https://files.catbox.moe/neagwc.jpg' },
-      { name: 'كيلو ممبار محمر', price: 290, image: 'https://files.catbox.moe/l3poiq.jpg' },
+      { name: 'محشي ورق عنب (الكيلو)', price: 130, image: '/images/products/محشى-ورق-العنب-130.jpg' },
+      { name: 'محشي كرنب (الكيلو)', price: 120, image: '/images/products/محشى-كرنب-120.jpg' },
+      { name: 'محشي مشكل (الكيلو)', price: 120, image: '/images/products/محشى-مشكل-120.jpg' },
+      { name: 'كيلو ممبار محمر', price: 290, image: '/images/products/كيلو-ممبار-محمر-290.jpg' },
       // طبيخ
-      { name: 'علبة ملوخية/بامية/ويكا/خضار', price: 60, images: ['https://files.catbox.moe/jzbatt.jpg', 'https://files.catbox.moe/dspgtj.jpg'] },
-      { name: 'طاجن رز معمر بالسمنة البلدي', price: 100, image: 'https://files.catbox.moe/21st1a.jpg' },
-      { name: 'صينية بطاطس كبيرة بدون لحوم', price: 190, image: 'https://files.catbox.moe/jmuy4a.jpg' },
-      { name: 'كيلو كفتة رز متصبعة', price: 300, image: 'https://files.catbox.moe/a6kh9e.jpg' },
+      { name: 'علبة ملوخية/بامية/ويكا/خضار', price: 60, image: '/images/products/علبة-ملوخيه-باميه-ويكا-خضار-60ج.jpg' },
+      { name: 'طاجن رز معمر بالسمنة البلدي', price: 100, image: '/images/products/طاجن-رز-معمر-بالسمنه-البلدى-100.jpg' },
+      { name: 'صينية بطاطس كبيرة بدون لحوم', price: 190, image: '/images/products/صنية-بطاطس-كبيره-بدون-لحوم-190.jpg' },
+      { name: 'كيلو كفتة رز متصبعة', price: 300, image: '/images/products/كيلو-كفتة-رز-متصبعه-300.jpg' },
       // صواني معجنات
-      { name: 'صينية جلاش باللحمة البلدي', price: 300, image: 'https://files.catbox.moe/yrpjlq.jpg' },
-      { name: 'صينية رقاق باللحمة البلدي', price: 300, image: 'https://files.catbox.moe/r45x0e.jpg' },
-      { name: 'صينية مكرونة بالبشاميل', price: 300, image: 'https://files.catbox.moe/7l2mws.jpg' },
-      { name: 'فرخة مشوية مع بصل وبطاطس', price: 360, image: 'https://files.catbox.moe/jauf3l.jpg' },
+      { name: 'صينية جلاش باللحمة البلدي', price: 300, image: '/images/products/صنية-جلاش-باللحمه-البلدى-300.jpg' },
+      { name: 'صينية رقاق باللحمة البلدي', price: 300, image: '/images/products/صنية-رقاق-باللحمه-البلدى-300.jpg' },
+      { name: 'صينية مكرونة بالبشاميل', price: 300, image: '/images/products/صنية-مكرونه-بالبشاميل-300.jpg' },
+      { name: 'فرخة مشوية مع بصل وبطاطس', price: 360, image: '/images/products/فرخه-مشويه-مع-بصل-وبطاطس360.jpg' },
     ],
   },
 ]

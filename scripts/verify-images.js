@@ -1,19 +1,31 @@
 // Quick script to verify all images in menu.js are accessible
 import https from 'https'
+import fs from 'fs'
+import path from 'path'
 import { categories } from '../src/data/menu.js'
 
+const BASE_PUBLIC = path.join(path.dirname(new URL(import.meta.url).pathname), '../public')
+
 function checkImage(url) {
-  return new Promise((resolve) => {
-    https.get(url, (response) => {
-      resolve({
-        url,
-        status: response.statusCode,
-        ok: response.statusCode === 200
-      })
-    }).on('error', () => {
-      resolve({ url, status: 'ERROR', ok: false })
+  // Remote URL
+  if (/^https?:\/\//i.test(url)) {
+    return new Promise((resolve) => {
+      https
+        .get(url, (response) => {
+          resolve({ url, status: response.statusCode, ok: response.statusCode === 200 })
+        })
+        .on('error', () => {
+          resolve({ url, status: 'ERROR', ok: false })
+        })
     })
-  })
+  }
+
+  // Local file under public/
+  const rel = url.replace(/^\//, '')
+  const fullPath = path.join(BASE_PUBLIC, rel)
+  const exists = fs.existsSync(fullPath)
+  const ok = exists && fs.statSync(fullPath).size > 0
+  return Promise.resolve({ url, status: exists ? 'LOCAL_OK' : 'LOCAL_MISSING', ok })
 }
 
 async function verifyAllImages() {

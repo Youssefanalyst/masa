@@ -4,10 +4,10 @@ import { placeholderImage } from '../data/menu'
 export default function SmartImage({ itemName, itemImage, categoryImage, className = '', alt = '', onlyProduct = false }) {
   const [imgError, setImgError] = useState(false)
   
-  // Use itemImage (CDN) directly, fallback to category or placeholder
+  // Use itemImage (CDN) directly, fallback to placeholder first (then category)
   const src = imgError 
-    ? (onlyProduct ? null : (categoryImage || placeholderImage))
-    : (itemImage || categoryImage || placeholderImage)
+    ? (onlyProduct ? null : (placeholderImage || categoryImage))
+    : (itemImage || placeholderImage || categoryImage)
 
   if (!src) {
     return null
