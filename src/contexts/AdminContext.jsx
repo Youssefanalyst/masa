@@ -118,7 +118,7 @@ export function AdminProvider({ children }) {
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
     
     // Stored hash of the admin password
-    const ADMIN_PASSWORD_HASH = 'a8c7e5c1f5e8d2b3a9f1c4e7d8b2a5f3c9e1d7b4a8f2c6e3d9b1a7f5c8e2d4b3'
+    const ADMIN_PASSWORD_HASH = '479f8ac48a267fbce22748f4059bf37af6dabe948b981754c9e458232e94069f'
     
     if (hashHex === ADMIN_PASSWORD_HASH) {
       localStorage.setItem('adminToken', 'masa-admin-authenticated')
