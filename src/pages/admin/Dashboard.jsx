@@ -4,31 +4,12 @@ import { useAdmin } from '../../contexts/AdminContext'
 import ProductForm from '../../components/admin/ProductForm'
 import ProductList from '../../components/admin/ProductList'
 import CategoryManager from '../../components/admin/CategoryManager'
-import { publishMenuToGithub } from '../../lib/github'
 
 export default function AdminDashboard() {
   const { categories, logout, resetToDefault } = useAdmin()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('products')
   const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id || '')
-
-  const handlePublish = async () => {
-    try {
-      let token = localStorage.getItem('gh_pat')
-      if (!token) {
-        token = window.prompt('ألصق GitHub Personal Access Token (صلاحية: Contents Read/Write)')
-        if (token) localStorage.setItem('gh_pat', token)
-      }
-      if (!token) {
-        alert('لا يوجد توكن. لم يتم النشر.')
-        return
-      }
-      await publishMenuToGithub(categories, token)
-      alert('تم نشر المنيو إلى GitHub Pages بنجاح')
-    } catch (e) {
-      alert('فشل النشر: ' + (e?.message || e))
-    }
-  }
 
   const handleLogout = () => {
     logout()
@@ -59,12 +40,6 @@ export default function AdminDashboard() {
               className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition"
             >
               عرض الموقع
-            </button>
-            <button
-              onClick={handlePublish}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-            >
-              نشر إلى GitHub
             </button>
             <button
               onClick={handleReset}

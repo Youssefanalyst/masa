@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import { categories as initialCategories } from '../data/menu'
 import { supabase, isSupabaseEnabled } from '../lib/supabase'
 import { assetsBase } from '../lib/assets'
-import { publishMenuToGithub } from '../lib/github'
+ 
 
 const AdminContext = createContext()
 
@@ -55,16 +55,7 @@ export function AdminProvider({ children }) {
     }
   }
 
-  const maybeAutoPublish = async (cats) => {
-    try {
-      const token = localStorage.getItem('gh_pat')
-      if (!token) return
-      await publishMenuToGithub(cats, token)
-      console.log('🚀 Auto-published menu to GitHub Pages')
-    } catch (e) {
-      console.warn('Auto-publish failed:', e)
-    }
-  }
+  // Removed GitHub auto-publish; Vercel deployment will not use client-side tokens
 
   const loadCategories = async () => {
     if (isSupabaseEnabled()) {
@@ -181,23 +172,21 @@ export function AdminProvider({ children }) {
         return false
       }
     } else {
-      // localStorage fallback + auto publish
-      setCategories(prevCategories => {
-        const next = prevCategories.map(cat =>
+      // localStorage fallback
+      setCategories(prevCategories =>
+        prevCategories.map(cat =>
           cat.id === categoryId
             ? { ...cat, items: [...cat.items, product] }
             : cat
         )
-        maybeAutoPublish(next)
-        return next
-      })
+      )
       return true
     }
   }
 
   const updateProduct = (categoryId, productIndex, updatedProduct) => {
-    setCategories(prevCategories => {
-      const next = prevCategories.map(cat =>
+    setCategories(prevCategories =>
+      prevCategories.map(cat =>
         cat.id === categoryId
           ? {
               ...cat,
@@ -207,14 +196,12 @@ export function AdminProvider({ children }) {
             }
           : cat
       )
-      maybeAutoPublish(next)
-      return next
-    })
+    )
   }
 
   const deleteProduct = (categoryId, productIndex) => {
-    setCategories(prevCategories => {
-      const next = prevCategories.map(cat =>
+    setCategories(prevCategories =>
+      prevCategories.map(cat =>
         cat.id === categoryId
           ? {
               ...cat,
@@ -222,35 +209,25 @@ export function AdminProvider({ children }) {
             }
           : cat
       )
-      maybeAutoPublish(next)
-      return next
-    })
+    )
   }
 
   const addCategory = (category) => {
-    setCategories(prev => {
-      const next = [...prev, category]
-      maybeAutoPublish(next)
-      return next
-    })
+    setCategories(prev => [...prev, category])
   }
 
   const updateCategory = (categoryId, updatedCategory) => {
-    setCategories(prevCategories => {
-      const next = prevCategories.map(cat =>
+    setCategories(prevCategories =>
+      prevCategories.map(cat =>
         cat.id === categoryId ? { ...cat, ...updatedCategory } : cat
       )
-      maybeAutoPublish(next)
-      return next
-    })
+    )
   }
 
   const deleteCategory = (categoryId) => {
-    setCategories(prevCategories => {
-      const next = prevCategories.filter(cat => cat.id !== categoryId)
-      maybeAutoPublish(next)
-      return next
-    })
+    setCategories(prevCategories =>
+      prevCategories.filter(cat => cat.id !== categoryId)
+    )
   }
 
   const resetToDefault = () => {

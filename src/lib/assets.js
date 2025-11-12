@@ -1,4 +1,4 @@
-export const assetsBase = (import.meta?.env?.VITE_ASSETS_BASE_URL) || 'https://youssefanalyst.github.io/masa'
+export const assetsBase = (import.meta?.env?.VITE_ASSETS_BASE_URL) || (import.meta?.env?.BASE_URL) || '/'
 
 export function resolveAssetUrl(url) {
   if (!url) return url
