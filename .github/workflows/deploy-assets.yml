@@ -1,16 +1,7 @@
-name: Deploy Site to GitHub Pages
+name: Disabled - GitHub Pages (using Vercel)
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'src/**'
-      - 'public/**'
-      - 'vite.config.js'
-      - 'scripts/export-assets.js'
-      - 'package.json'
-      - 'package-lock.json'
-      - '.github/workflows/deploy-assets.yml'
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:

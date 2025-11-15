@@ -6,19 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:snap": "vite build && react-snap",
-    "lint": "eslint .",
     "preview": "vite preview",
-    "copy-images": "node scripts/copy-images.js",
-    "upload-images": "node scripts/upload-to-catbox.js",
-    "retry-uploads": "node scripts/retry-failed-uploads.js",
-    "update-image-urls": "node scripts/update-image-urls.js",
-    "import-supabase": "node scripts/import-to-supabase.js",
-    "upload-supabase-images": "node scripts/upload-local-images-to-supabase.js",
-    "update-menu-supabase": "node scripts/update-menu-with-supabase-urls.js",
-    "export:assets": "node scripts/export-assets.js",
-    "deploy:assets": "gh-pages -d assets-dist -b gh-pages -m 'deploy assets-dist'",
-    "upload:mongo": "node scripts/upload-to-mongodb.js"
+    "lint": "eslint ."
   },
   "reactSnap": {
     "source": "dist",
@@ -27,42 +16,27 @@
       "collapseWhitespace": true,
       "removeComments": true
     },
-    "crawl": true,
-    "include": [
-      "/",
-      "/menu",
-      "/about",
-      "/contact"
-    ]
+    "crawl": true
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.81.1",
-    "clsx": "^2.1.1",
-    "dotenv": "^17.2.3",
-    "form-data": "^4.0.4",
-    "lucide-react": "^0.553.0",
-    "node-fetch": "^3.3.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^6.26.2",
-    "tailwind-merge": "^3.4.0",
-    "mongodb": "^5.9.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.0.1",
+    "react-router-dom": "^6.22.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react": "^4.3.1",
-    "autoprefixer": "^10.4.22",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "postcss": "^8.5.6",
-    "react-snap": "^1.23.0",
-    "tailwindcss": "^3.4.14",
-    "vite": "^5.4.10",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.0.12",
     "gh-pages": "^6.1.1"
   }
 }

@@ -1,8 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { categories as initialCategories } from '../data/menu'
-import { supabase, isSupabaseEnabled } from '../lib/supabase'
-import { assetsBase } from '../lib/assets'
- 
+
 
 const AdminContext = createContext()
 
@@ -10,7 +8,7 @@ export function AdminProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [categories, setCategories] = useState([])
 
-  // Load data on mount (from Supabase or localStorage)
+  // Load data on mount from localStorage
   useEffect(() => {
     loadCategories()
     
@@ -21,7 +19,7 @@ export function AdminProvider({ children }) {
     }
   }, [])
 
-  const loadFromLocalStorage = () => {
+  const loadCategories = () => {
     const savedCategories = localStorage.getItem('menuCategories')
     if (savedCategories) {
       try {
@@ -37,77 +35,9 @@ export function AdminProvider({ children }) {
     }
   }
 
-  const loadFromRemoteAssets = async () => {
-    try {
-      const res = await fetch(`/api/menu`, { cache: 'no-store' })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      const data = await res.json()
-      if (data && Array.isArray(data.categories)) {
-        setCategories(data.categories)
-        localStorage.setItem('menuCategories', JSON.stringify(data.categories))
-        console.log('🌐 Data loaded from MongoDB API')
-        return
-      }
-      throw new Error('Invalid menu.json format')
-    } catch (error) {
-      console.warn('Remote API failed, falling back to localStorage/default:', error)
-      loadFromLocalStorage()
-    }
-  }
-
-  // Removed GitHub auto-publish; Vercel deployment will not use client-side tokens
-
-  const loadCategories = async () => {
-    if (isSupabaseEnabled()) {
-      // Load from Supabase
-      try {
-        const { data: cats, error: catsError } = await supabase
-          .from('categories')
-          .select('*')
-          .order('display_order', { ascending: true })
-
-        if (catsError) throw catsError
-
-        // Load products for each category
-        const { data: products, error: prodsError } = await supabase
-          .from('products')
-          .select('*')
-          .order('display_order', { ascending: true })
-
-        if (prodsError) throw prodsError
-
-        // Group products by category
-        const categoriesWithProducts = cats.map(cat => ({
-          id: cat.id,
-          name: cat.name,
-          image: cat.image,
-          items: products
-            .filter(p => p.category_id === cat.id)
-            .map(p => ({
-              name: p.name,
-              price: p.price,
-              desc: p.description,
-              image: p.image,
-              images: p.images
-            }))
-        }))
-
-        setCategories(categoriesWithProducts)
-        console.log('✅ Data loaded from Supabase')
-      } catch (error) {
-        console.error('Supabase error, falling back to localStorage:', error)
-        loadFromLocalStorage()
-      }
-    } else {
-      // Load from Mongo API by default; fallback to localStorage only if it fails
-      await loadFromRemoteAssets()
-    }
-  }
-
-  // Save categories whenever they change
+  // Save categories to localStorage whenever they change
   useEffect(() => {
-    if (categories.length > 0 && !isSupabaseEnabled()) {
-      // Only save to localStorage if Supabase is not enabled
+    if (categories.length > 0) {
       localStorage.setItem('menuCategories', JSON.stringify(categories))
     }
   }, [categories])
@@ -137,41 +67,15 @@ export function AdminProvider({ children }) {
   }
 
   // CRUD Operations
-  const addProduct = async (categoryId, product) => {
-    if (isSupabaseEnabled()) {
-      try {
-        const { data, error } = await supabase
-          .from('products')
-          .insert({
-            category_id: categoryId,
-            name: product.name,
-            price: product.price,
-            description: product.desc,
-            image: product.image,
-            images: product.images
-          })
-          .select()
-
-        if (error) throw error
-        
-        // Reload categories to get updated data
-        await loadCategories()
-        return true
-      } catch (error) {
-        console.error('Error adding product:', error)
-        return false
-      }
-    } else {
-      // localStorage fallback
-      setCategories(prevCategories =>
-        prevCategories.map(cat =>
-          cat.id === categoryId
-            ? { ...cat, items: [...cat.items, product] }
-            : cat
-        )
+  const addProduct = (categoryId, product) => {
+    setCategories(prevCategories =>
+      prevCategories.map(cat =>
+        cat.id === categoryId
+          ? { ...cat, items: [...(cat.items || []), product] }
+          : cat
       )
-      return true
-    }
+    )
+    return true
   }
 
   const updateProduct = (categoryId, productIndex, updatedProduct) => {
