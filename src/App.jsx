@@ -7,6 +7,7 @@ import Contact from './pages/Contact'
 import AdminLogin from './pages/admin/Login'
 import AdminDashboard from './pages/admin/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import NotFound from './pages/NotFound'
 
 export default function App() {
   const location = useLocation()
@@ -32,6 +33,7 @@ export default function App() {
               </ProtectedRoute>
             } 
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       {!isAdminRoute && <Footer />}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { currency, restaurantName } from '../data/menu'
+import { currency, restaurantName, heroImage, tagline } from '../data/menu'
 import { useAdmin } from '../contexts/AdminContext'
 import SmartImage from '../components/SmartImage'
 import RotatingImage from '../components/RotatingImage'
@@ -25,6 +25,22 @@ export default function Menu() {
         <title>المنيو الكامل - {restaurantName} | أسعار وصور الأطباق</title>
         <meta name="description" content={`تصفح منيو ${restaurantName} الكامل مع الأسعار والصور - صواني فاخرة، طيور مشوية ومحمرة، محاشي متنوعة، وأطباق طبيخ بيتي شهية بالسمنة البلدي. احجز الآن!`} />
         <meta name="keywords" content="منيو مطعم ماسة, أسعار, صواني أفراح, ديك رومي, حمام, فراخ, محاشي ورق عنب, محشي كرنب, ملوخية, بامية, كفتة رز, عشا العروسة, كبسة" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : '/menu'} />
+        <link rel="alternate" hrefLang="ar" href={typeof window !== 'undefined' ? window.location.href : '/menu'} />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`المنيو الكامل - ${restaurantName}`} />
+        <meta property="og:description" content={`تصفح منيو ${restaurantName} الكامل مع الأسعار والصور - صواني فاخرة، طيور مشوية ومحمرة، محاشي متنوعة، وأطباق طبيخ بيتي شهية بالسمنة البلدي. احجز الآن!`} />
+        <meta property="og:image" content={resolveAssetUrl(heroImage)} />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`المنيو الكامل - ${restaurantName}`} />
+        <meta name="twitter:description" content={`تصفح منيو ${restaurantName} الكامل مع الأسعار والصور - صواني فاخرة، طيور مشوية ومحمرة، محاشي متنوعة، وأطباق طبيخ بيتي شهية بالسمنة البلدي. احجز الآن!`} />
+        <meta name="twitter:image" content={resolveAssetUrl(heroImage)} />
         
         {/* Breadcrumb */}
         <script type="application/ld+json">
