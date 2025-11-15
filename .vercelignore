@@ -2,5 +2,6 @@
 
 # Ignore development files
 src/data/uploaded-images.json
-scripts/
+scripts/*
+!scripts/generate-sitemap.js
 *.log
