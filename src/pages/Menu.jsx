@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { currency, restaurantName, heroImage, tagline } from '../data/menu'
 import { useAdmin } from '../contexts/AdminContext'
@@ -9,13 +10,17 @@ import { resolveAssetUrl } from '../lib/assets'
 export default function Menu() {
   const { categories } = useAdmin()
   const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id)
+  const location = useLocation()
 
   // Update selected category when categories load
   useEffect(() => {
-    if (categories.length > 0 && !selectedCategory) {
-      setSelectedCategory(categories[0].id)
+    if (categories.length === 0) return
+    const hash = (typeof window !== 'undefined' && location?.hash) ? location.hash.replace('#', '') : ''
+    const target = (hash && categories.find(c => c.id === hash)?.id) || selectedCategory || categories[0].id
+    if (target !== selectedCategory) {
+      setSelectedCategory(target)
     }
-  }, [categories, selectedCategory])
+  }, [categories, selectedCategory, location])
 
   const currentCategory = categories.find(cat => cat.id === selectedCategory) || categories[0]
 
@@ -24,7 +29,7 @@ export default function Menu() {
       <Helmet>
         <title>المنيو الكامل - {restaurantName} | أسعار وصور الأطباق</title>
         <meta name="description" content={`تصفح منيو ${restaurantName} الكامل مع الأسعار والصور - صواني فاخرة، طيور مشوية ومحمرة، محاشي متنوعة، وأطباق طبيخ بيتي شهية بالسمنة البلدي. احجز الآن!`} />
-        <meta name="keywords" content="منيو مطعم ماسة, أسعار, صواني أفراح, ديك رومي, حمام, فراخ, محاشي ورق عنب, محشي كرنب, ملوخية, بامية, كفتة رز, عشا العروسة, كبسة" />
+        <meta name="keywords" content="منيو مطبخ ماسه, أسعار, صواني أفراح, ديك رومي, حمام, فراخ, محاشي ورق عنب, محشي كرنب, ملوخية, بامية, كفتة رز, عشا العروسة, كبسة" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : '/menu'} />
         <link rel="alternate" hrefLang="ar" href={typeof window !== 'undefined' ? window.location.href : '/menu'} />
@@ -99,7 +104,12 @@ export default function Menu() {
               {categories.map((cat) => (
                 <button
                   key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
+                  onClick={() => {
+                    setSelectedCategory(cat.id)
+                    if (typeof window !== 'undefined') {
+                      window.history.replaceState(null, '', `#${cat.id}`)
+                    }
+                  }}
                   className={`
                     flex items-center gap-3 px-4 py-3 rounded-xl transition-all whitespace-nowrap
                     ${selectedCategory === cat.id
