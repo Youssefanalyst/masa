@@ -3,6 +3,7 @@ import { phone, email, facebook, whatsappLink, restaurantName, heroImage } from 
 import { resolveAssetUrl } from '../lib/assets'
 
 export default function Contact() {
+  const localPhoneMain = phone && phone.startsWith('+20') ? `0${phone.slice(3)}` : phone
   return (
     <main className="max-w-4xl mx-auto px-4 py-10">
       <Helmet>
@@ -23,8 +24,12 @@ export default function Contact() {
       </Helmet>
       <h1 className="text-3xl font-bold text-gray-800 mb-6">تواصل معنا</h1>
       <ul className="space-y-4 text-lg">
-        <li><a className="text-brand-primary hover:underline" href={`tel:${phone}`}>اتصال: {phone}</a></li>
-        <li><a className="text-brand-primary hover:underline" href={`tel:+201113020419`}>اتصال: 01113020419</a></li>
+        <li>
+          <span>اتصال: </span>
+          <a className="text-brand-primary hover:underline" href={`tel:${phone}`}>{localPhoneMain}</a>
+          <span className="mx-1"> - </span>
+          <a className="text-brand-primary hover:underline" href={`tel:+201113020419`}>01113020419</a>
+        </li>
         <li><a className="text-brand-primary hover:underline" href={whatsappLink} target="_blank" rel="noreferrer">واتساب</a></li>
         <li><a className="text-brand-primary hover:underline" href={`mailto:${email}`}>البريد: {email}</a></li>
         <li><a className="text-brand-primary hover:underline" href={facebook} target="_blank" rel="noreferrer">فيسبوك</a></li>
