@@ -21,9 +21,17 @@ export default function Footer() {
           <h4 className="font-semibold mb-2">تواصل معنا</h4>
           <ul className="space-y-1" itemScope itemType="https://schema.org/Restaurant">
             <li>
-              <a className="hover:text-brand-primary hover:underline" href={`tel:${phone}`} itemProp="telephone" aria-label={`الاتصال على ${phone}`}>
-                📞 اتصال: {phone}
-              </a>
+              {(() => {
+                const localPhoneMain = phone && phone.startsWith('+20') ? `0${phone.slice(3)}` : phone
+                return (
+                  <span>
+                    📞 اتصال: {' '}
+                    <a className="hover:text-brand-primary hover:underline" href={`tel:${phone}`} itemProp="telephone" aria-label={`الاتصال على ${phone}`}>{localPhoneMain}</a>
+                    <span className="mx-1"> - </span>
+                    <a className="hover:text-brand-primary hover:underline" href={`tel:+201113020419`} itemProp="telephone" aria-label={`الاتصال على 01113020419`}>01113020419</a>
+                  </span>
+                )
+              })()}
             </li>
             <li>
               <a className="hover:text-brand-primary hover:underline" href={`mailto:${email}`} itemProp="email" aria-label={`إرسال بريد إلى ${email}`}>
