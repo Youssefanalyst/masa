@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-amber-100">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold text-brand-primary flex items-center gap-2" aria-label="الرئيسية - مطعم ماسة">
+        <Link to="/" className="text-2xl font-bold text-brand-primary flex items-center gap-2" aria-label={`الرئيسية - ${restaurantName}`}>
           <span className="text-3xl">💎</span>
           {restaurantName}
         </Link>

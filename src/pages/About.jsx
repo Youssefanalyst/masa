@@ -23,9 +23,12 @@ export default function About() {
         <meta name="twitter:image" content={resolveAssetUrl(heroImage)} />
       </Helmet>
       <h1 className="text-3xl font-bold text-gray-800 mb-4">من نحن</h1>
-      <p className="text-gray-700 leading-8">
-        مطعم ماسة يقدم أكل بيتي أصيل بالسمنة البلدي، بجودة عالية ونظافة هي رأس مالنا.
-        نجهز الولائم والطلبات الخاصة حسب رغبتكم، مع التنوع في الصواني، المحاشي، الطيور والطبيخ.
+      <p className="text-gray-700 leading-8 whitespace-pre-line">
+        {`مطبخ ماسه مطعم بيتي
+نقدم أكل بيتى يتميز بالطعم الفلاحى الأصيل بالسمنه البلدى ونظافه لا يعلى عليها بفضل الله .
+✨عشا العروسه 
+✨عزومات 
+اطلب واستلم تانى يوم يوصلك لحد البيت اى مكان داخل القاهره`}
       </p>
     </main>
   )

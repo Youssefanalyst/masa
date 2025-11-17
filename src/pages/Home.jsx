@@ -12,14 +12,14 @@ export default function Home() {
       <Helmet>
         <title>{restaurantName} - طعم بيتي أصيل بالسمنة البلدي</title>
         <meta name="description" content={`${restaurantName} - ${tagline}. نقدم أشهى المأكولات المصرية من صواني، محاشي، طيور، وطبيخ بيتي بالسمنة البلدي. اطلب الآن عبر واتساب ${phone}`} />
-        <meta name="keywords" content="مطعم, مطعم ماسة, أكل بيتي, سمنة بلدي, صواني, محاشي, طيور, ديك رومي, حمام, فراخ محمرة, طبيخ بيتي, مطاعم مصرية, كبسة, بطة محمرة, ممبار" />
+        <meta name="keywords" content="مطعم, مطبخ ماسه, أكل بيتي, سمنة بلدي, صواني, محاشي, طيور, ديك رومي, حمام, فراخ محمرة, طبيخ بيتي, مطاعم مصرية, كبسة, بطة محمرة, ممبار" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="restaurant" />
         <meta property="og:title" content={`${restaurantName} - طعم بيتي أصيل`} />
         <meta property="og:description" content={tagline} />
         <meta property="og:image" content={resolveAssetUrl(heroImage)} />
-        <meta property="og:image:alt" content="عشا العروسة - ديك رومي، بطة، حمام من مطعم ماسة" />
+        <meta property="og:image:alt" content={`عشا العروسة - ديك رومي، بطة، حمام من ${restaurantName}`} />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
         <meta property="og:locale" content="ar_EG" />
         
@@ -28,7 +28,7 @@ export default function Home() {
         <meta name="twitter:title" content={`${restaurantName} - طعم بيتي أصيل`} />
         <meta name="twitter:description" content={tagline} />
         <meta name="twitter:image" content={resolveAssetUrl(heroImage)} />
-        <meta name="twitter:image:alt" content="عشا العروسة - ديك رومي، بطة، حمام من مطعم ماسة" />
+        <meta name="twitter:image:alt" content={`عشا العروسة - ديك رومي، بطة، حمام من ${restaurantName}`} />
         
         {/* Business Info */}
         <meta name="contact" content={phone} />
@@ -66,7 +66,7 @@ export default function Home() {
             <Link to="/menu" className="px-6 py-3 rounded-full bg-brand-primary text-white hover:bg-amber-700">شاهد المنيو</Link>
           </div>
           <div className="max-w-4xl mx-auto">
-            <img src={resolveAssetUrl(heroImage) || placeholderImage} alt="عشا العروسة - ديك رومي، بطة، حمام، وأطباق شهية من مطعم ماسة" loading="eager" className="w-full h-auto object-contain rounded-2xl shadow-lg border border-amber-100" />
+            <img src={resolveAssetUrl(heroImage) || placeholderImage} alt={`عشا العروسة - ديك رومي، بطة، حمام، وأطباق شهية من ${restaurantName}`} loading="eager" className="w-full h-auto object-contain rounded-2xl shadow-lg border border-amber-100" />
           </div>
         </div>
       </section>
@@ -103,14 +103,14 @@ export default function Home() {
                 {productImages.length > 0 ? (
                   <RotatingImage
                     images={productImages}
-                    alt={`منتجات ${cat.name} - ${cat.items.map(i => i.name).slice(0, 3).join('، ')} من مطعم ماسة`}
+                    alt={`منتجات ${cat.name} - ${cat.items.map(i => i.name).slice(0, 3).join('، ')} من ${restaurantName}`}
                     className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-lg mb-3"
                     interval={5000}
                   />
                 ) : (
                   <img
                     src={cat.image || placeholderImage}
-                    alt={`تصنيف ${cat.name} - مطعم ماسة`}
+                    alt={`تصنيف ${cat.name} - ${restaurantName}`}
                     loading="lazy"
                     width="400"
                     height="300"
