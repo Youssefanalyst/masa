@@ -10,6 +10,8 @@ export function AdminProvider({ children }) {
 
   // Load data on mount from localStorage
   useEffect(() => {
+    // Reset to get new menu items
+    localStorage.removeItem('menuCategories')
     loadCategories()
     
     // Check if admin is logged in

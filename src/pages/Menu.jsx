@@ -9,18 +9,19 @@ import { resolveAssetUrl } from '../lib/assets'
 
 export default function Menu() {
   const { categories } = useAdmin()
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id)
+  const [selectedCategory, setSelectedCategory] = useState(null)
   const location = useLocation()
 
-  // Update selected category when categories load
+  // Update selected category when categories load or hash changes
   useEffect(() => {
     if (categories.length === 0) return
     const hash = (typeof window !== 'undefined' && location?.hash) ? location.hash.replace('#', '') : ''
-    const target = (hash && categories.find(c => c.id === hash)?.id) || selectedCategory || categories[0].id
-    if (target !== selectedCategory) {
-      setSelectedCategory(target)
+    if (hash && categories.find(c => c.id === hash)) {
+      setSelectedCategory(hash)
+    } else if (!selectedCategory) {
+      setSelectedCategory(categories[0].id)
     }
-  }, [categories, selectedCategory, location])
+  }, [categories, location.hash])
 
   const currentCategory = categories.find(cat => cat.id === selectedCategory) || categories[0]
 
